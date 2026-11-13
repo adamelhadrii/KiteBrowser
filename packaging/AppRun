@@ -1,0 +1,10 @@
+#!/bin/sh
+# AppImage entry point. Kite uses the system's GTK 4, libadwaita and WebKitGTK 6.0 rather than bundling them.
+here=$(dirname "$(readlink -f "$0")")
+if ! /usr/bin/python3 -c 'import gi; gi.require_version("Gtk", "4.0"); gi.require_version("Adw", "1"); gi.require_version("WebKit", "6.0")' 2>/dev/null; then
+    msg="KiteBrowser needs GTK 4, libadwaita and WebKitGTK 6.0. Arch: sudo pacman -S python-gobject gtk4 libadwaita webkitgtk-6.0   Debian/Ubuntu: sudo apt install python3-gi gir1.2-gtk-4.0 gir1.2-adw-1 gir1.2-webkit-6.0   Fedora: sudo dnf install python3-gobject gtk4 libadwaita webkitgtk6.0"
+    echo "$msg" >&2
+    command -v notify-send >/dev/null 2>&1 && notify-send "KiteBrowser can't start" "$msg"
+    exit 1
+fi
+exec /usr/bin/python3 "$here/usr/share/kitebrowser/main.py" "$@"

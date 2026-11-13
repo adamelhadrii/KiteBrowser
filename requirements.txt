@@ -1,0 +1,3 @@
+# GTK 4, libadwaita and WebKitGTK 6.0 are system libraries, not pip packages; see README.md.
+# Prefer the distro's python3-gi / python-gobject; pip-installing PyGObject needs the GTK dev headers.
+PyGObject>=3.48

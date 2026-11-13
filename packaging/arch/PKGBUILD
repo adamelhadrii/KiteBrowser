@@ -1,0 +1,16 @@
+# Built by ../build-arch.sh, which packs the source tree into the tarball below.
+pkgname=kitebrowser
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='A light, fully customizable GTK 4 web browser'
+arch=('any')
+license=('unknown')
+depends=('python' 'python-gobject' 'gtk4' 'libadwaita' 'webkitgtk-6.0')
+optdepends=('hunspell-en_us: English spell checking')
+source=("kitebrowser-$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+    cd "kitebrowser-$pkgver"
+    sh packaging/stage.sh "$pkgdir"
+}
